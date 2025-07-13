@@ -1,0 +1,243 @@
+﻿
+@{
+    ViewData["Title"] = "Ana Sayfa";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="h3 mb-0">
+                <i class="fas fa-tachometer-alt me-2"></i>Admin Dashboard
+            </h1>
+            <div class="text-muted">
+                <i class="fas fa-calendar me-1"></i>@DateTime.Now.ToString("dd MMMM yyyy, dddd")
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- İstatistik Kartları -->
+<div class="row mb-4">
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="stats-card">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h4 class="mb-1">125</h4>
+                    <p class="mb-0 opacity-75">Toplam Haber</p>
+                </div>
+                <div class="text-end">
+                    <i class="fas fa-newspaper fa-2x opacity-75"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="stats-card success">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h4 class="mb-1">15</h4>
+                    <p class="mb-0 opacity-75">Kategori</p>
+                </div>
+                <div class="text-end">
+                    <i class="fas fa-tags fa-2x opacity-75"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="stats-card warning">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h4 class="mb-1">8</h4>
+                    <p class="mb-0 opacity-75">Aktif Yazar</p>
+                </div>
+                <div class="text-end">
+                    <i class="fas fa-users fa-2x opacity-75"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="stats-card danger">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h4 class="mb-1">1,250</h4>
+                    <p class="mb-0 opacity-75">Günlük Ziyaret</p>
+                </div>
+                <div class="text-end">
+                    <i class="fas fa-eye fa-2x opacity-75"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Hızlı İşlemler -->
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-0">
+                <h5 class="mb-0">
+                    <i class="fas fa-bolt me-2 text-warning"></i>Hızlı İşlemler
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <a href="/Admin/Categories/Create" class="btn btn-admin btn-primary w-100">
+                            <i class="fas fa-plus me-2"></i>Yeni Kategori
+                        </a>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <a href="#" class="btn btn-admin btn-success w-100">
+                            <i class="fas fa-plus me-2"></i>Yeni Haber
+                        </a>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <a href="#" class="btn btn-admin btn-info w-100">
+                            <i class="fas fa-user-plus me-2"></i>Yeni Yazar
+                        </a>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Son Aktiviteler -->
+<div class="row">
+    <div class="col-lg-8 mb-4">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-0">
+                <h5 class="mb-0">
+                    <i class="fas fa-clock me-2 text-info"></i>Son Eklenen Haberler
+                </h5>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Başlık</th>
+                                <th>Kategori</th>
+                                <th>Yazar</th>
+                                <th>Tarih</th>
+                                <th>Durum</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img src="https://via.placeholder.com/40x30" class="rounded me-2" alt="Haber">
+                                        <div>
+                                            <div class="fw-medium">Türkiye'de Ekonomik Gelişmeler</div>
+                                            <small class="text-muted">Ekonomi haberleri</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="badge bg-primary">Ekonomi</span></td>
+                                <td>Ahmet Yılmaz</td>
+                                <td>@DateTime.Now.AddDays(-1).ToString("dd.MM.yyyy")</td>
+                                <td><span class="badge bg-success">Yayında</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img src="https://via.placeholder.com/40x30" class="rounded me-2" alt="Haber">
+                                        <div>
+                                            <div class="fw-medium">Spor Dünyasından Haberler</div>
+                                            <small class="text-muted">Spor haberleri</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="badge bg-warning">Spor</span></td>
+                                <td>Mehmet Demir</td>
+                                <td>@DateTime.Now.AddDays(-2).ToString("dd.MM.yyyy")</td>
+                                <td><span class="badge bg-warning">Beklemede</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img src="https://via.placeholder.com/40x30" class="rounded me-2" alt="Haber">
+                                        <div>
+                                            <div class="fw-medium">Teknoloji Güncellemeleri</div>
+                                            <small class="text-muted">Teknoloji haberleri</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="badge bg-info">Teknoloji</span></td>
+                                <td>Ayşe Kaya</td>
+                                <td>@DateTime.Now.AddDays(-3).ToString("dd.MM.yyyy")</td>
+                                <td><span class="badge bg-success">Yayında</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-4 mb-4">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-0">
+                <h5 class="mb-0">
+                    <i class="fas fa-chart-pie me-2 text-success"></i>Kategori Dağılımı
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between mb-1">
+                        <span>Ekonomi</span>
+                        <span class="text-muted">35%</span>
+                    </div>
+                    <div class="progress" style="height: 8px;">
+                        <div class="progress-bar bg-primary" style="width: 35%"></div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between mb-1">
+                        <span>Spor</span>
+                        <span class="text-muted">25%</span>
+                    </div>
+                    <div class="progress" style="height: 8px;">
+                        <div class="progress-bar bg-warning" style="width: 25%"></div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between mb-1">
+                        <span>Teknoloji</span>
+                        <span class="text-muted">20%</span>
+                    </div>
+                    <div class="progress" style="height: 8px;">
+                        <div class="progress-bar bg-info" style="width: 20%"></div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between mb-1">
+                        <span>Politika</span>
+                        <span class="text-muted">15%</span>
+                    </div>
+                    <div class="progress" style="height: 8px;">
+                        <div class="progress-bar bg-danger" style="width: 15%"></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="d-flex justify-content-between mb-1">
+                        <span>Diğer</span>
+                        <span class="text-muted">5%</span>
+                    </div>
+                    <div class="progress" style="height: 8px;">
+                        <div class="progress-bar bg-secondary" style="width: 5%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

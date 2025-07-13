@@ -1,0 +1,343 @@
+﻿@model UluHaber.Entities.Post
+
+@{
+    ViewData["Title"] = "Haber Detayları";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="h3 mb-0">
+                <i class="fas fa-eye me-2"></i>Haber Detayları
+            </h1>
+            <div class="d-flex gap-2">
+                <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-admin btn-warning">
+                    <i class="fas fa-edit me-2"></i>Düzenle
+                </a>
+                <a asp-action="Index" class="btn btn-admin btn-outline-secondary">
+                    <i class="fas fa-arrow-left me-2"></i>Geri Dön
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-0">
+                <h5 class="mb-0">
+                    <i class="fas fa-info-circle me-2 text-primary"></i>Haber Bilgileri
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-8 mb-3">
+                        <label class="form-label fw-medium text-muted">
+                            <i class="fas fa-heading me-1"></i>Haber Başlığı
+                        </label>
+                        <div class="fw-medium fs-5">@Model.Title</div>
+                    </div>
+                    
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label fw-medium text-muted">
+                            <i class="fas fa-link me-1"></i>URL Başlığı
+                        </label>
+                        <div class="fw-medium">
+                            <code class="bg-light px-2 py-1 rounded">@Model.Slug</code>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label fw-medium text-muted">
+                        <i class="fas fa-align-left me-1"></i>Özet
+                    </label>
+                    <div class="fw-medium">
+                        @if (!string.IsNullOrEmpty(Model.Summary))
+                        {
+                            @Model.Summary
+                        }
+                        else
+                        {
+                            <span class="text-muted">Özet girilmemiş</span>
+                        }
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label fw-medium text-muted">
+                        <i class="fas fa-file-text me-1"></i>Haber İçeriği
+                    </label>
+                    <div class="fw-medium">
+                        @if (!string.IsNullOrEmpty(Model.Content))
+                        {
+                            <div class="bg-light p-3 rounded">
+                                @Html.Raw(Model.Content.Replace("\n", "<br>"))
+                            </div>
+                        }
+                        else
+                        {
+                            <span class="text-muted">İçerik girilmemiş</span>
+                        }
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-medium text-muted">
+                            <i class="fas fa-tags me-1"></i>Kategori
+                        </label>
+                        <div class="fw-medium">
+                            @if (Model.Category != null)
+                            {
+                                <span class="badge bg-primary">
+                                    @if (!string.IsNullOrEmpty(Model.Category.Icon))
+                                    {
+                                        <i class="@Model.Category.Icon me-1"></i>
+                                    }
+                                    @Model.Category.Name
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="text-muted">Kategori belirlenmemiş</span>
+                            }
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-medium text-muted">
+                            <i class="fas fa-user me-1"></i>Yazar
+                        </label>
+                        <div class="fw-medium">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-user-circle me-2 text-muted"></i>
+                                <span>@Model.AuthorName</span>
+                            </div>
+                            @if (Model.Author != null)
+                            {
+                                <small class="text-muted">@Model.Author.Email</small>
+                            }
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-medium text-muted">
+                            <i class="fas fa-image me-1"></i>Ana Görsel
+                        </label>
+                        <div class="fw-medium">
+                            @if (!string.IsNullOrEmpty(Model.FeaturedImage))
+                            {
+                                <div class="d-flex align-items-center">
+                                    <img src="@Model.FeaturedImage" class="rounded me-2" alt="Haber" style="width: 100px; height: 70px; object-fit: cover;">
+                                    <div>
+                                        <small class="text-muted">@Model.FeaturedImage</small>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <span class="text-muted">Görsel belirlenmemiş</span>
+                            }
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-medium text-muted">
+                            <i class="fas fa-toggle-on me-1"></i>Durum
+                        </label>
+                        <div class="fw-medium">
+                            @if (Model.IsPublished)
+                            {
+                                <span class="badge bg-success fs-6">
+                                    <i class="fas fa-check me-1"></i>Yayında
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-warning fs-6">
+                                    <i class="fas fa-clock me-1"></i>Taslak
+                                </span>
+                            }
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label fw-medium text-muted">
+                        <i class="fas fa-star me-1"></i>Özellikler
+                    </label>
+                    <div class="fw-medium">
+                        <div class="d-flex flex-wrap gap-2">
+                            @if (Model.IsFeatured)
+                            {
+                                <span class="badge bg-warning fs-6">
+                                    <i class="fas fa-star me-1"></i>Öne Çıkan
+                                </span>
+                            }
+                            @if (Model.IsBreakingNews)
+                            {
+                                <span class="badge bg-danger fs-6">
+                                    <i class="fas fa-fire me-1"></i>Son Dakika
+                                </span>
+                            }
+                            @if (!Model.IsFeatured && !Model.IsBreakingNews)
+                            {
+                                <span class="text-muted">Özel özellik belirlenmemiş</span>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-4">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-0">
+                <h5 class="mb-0">
+                    <i class="fas fa-clock me-2 text-info"></i>Zaman Bilgileri
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label class="form-label fw-medium text-muted">
+                        <i class="fas fa-hashtag me-1"></i>Haber ID
+                    </label>
+                    <div class="fw-medium fs-5">@Model.Id</div>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label fw-medium text-muted">
+                        <i class="fas fa-calendar-plus me-1"></i>Oluşturulma Tarihi
+                    </label>
+                    <div class="fw-medium">
+                        <i class="fas fa-clock me-1 text-muted"></i>
+                        @Model.CreatedAt.ToString("dd MMMM yyyy, dddd")
+                    </div>
+                    <small class="text-muted">@Model.CreatedAt.ToString("HH:mm")</small>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label fw-medium text-muted">
+                        <i class="fas fa-calendar-edit me-1"></i>Son Güncelleme
+                    </label>
+                    <div class="fw-medium">
+                        <i class="fas fa-clock me-1 text-muted"></i>
+                        @Model.UpdatedAt.ToString("dd MMMM yyyy, dddd")
+                    </div>
+                    <small class="text-muted">@Model.UpdatedAt.ToString("HH:mm")</small>
+                </div>
+                
+                @if (Model.PublishedAt.HasValue)
+                {
+                    var timeDiff = DateTime.Now - Model.PublishedAt.Value;
+                    var daysAgo = (int)timeDiff.TotalDays;
+                    
+                    <div class="mb-3">
+                        <label class="form-label fw-medium text-muted">
+                            <i class="fas fa-globe me-1"></i>Yayın Tarihi
+                        </label>
+                        <div class="fw-medium">
+                            <i class="fas fa-clock me-1 text-muted"></i>
+                            @Model.PublishedAt.Value.ToString("dd MMMM yyyy, dddd")
+                        </div>
+                        <small class="text-muted">@Model.PublishedAt.Value.ToString("HH:mm")</small>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label fw-medium text-muted">
+                            <i class="fas fa-history me-1"></i>Yayın Süresi
+                        </label>
+                        <div class="fw-medium">
+                            @if (daysAgo == 0)
+                            {
+                                <span class="badge bg-success">Bugün yayınlandı</span>
+                            }
+                            else if (daysAgo == 1)
+                            {
+                                <span class="badge bg-info">1 gün önce</span>
+                            }
+                            else if (daysAgo < 7)
+                            {
+                                <span class="badge bg-warning">@daysAgo gün önce</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary">@daysAgo gün önce</span>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        
+        <div class="card border-0 shadow-sm mt-3">
+            <div class="card-header bg-white border-0">
+                <h5 class="mb-0">
+                    <i class="fas fa-chart-bar me-2 text-success"></i>İstatistikler
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label class="form-label fw-medium text-muted">
+                        <i class="fas fa-eye me-1"></i>Görüntülenme
+                    </label>
+                    <div class="fw-medium fs-4 text-primary">0</div>
+                    <small class="text-muted">Toplam görüntülenme sayısı</small>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label fw-medium text-muted">
+                        <i class="fas fa-comments me-1"></i>Yorumlar
+                    </label>
+                    <div class="fw-medium fs-4 text-success">0</div>
+                    <small class="text-muted">Toplam yorum sayısı</small>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label fw-medium text-muted">
+                        <i class="fas fa-share me-1"></i>Paylaşımlar
+                    </label>
+                    <div class="fw-medium fs-4 text-warning">0</div>
+                    <small class="text-muted">Sosyal medya paylaşımları</small>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label fw-medium text-muted">
+                        <i class="fas fa-heart me-1"></i>Beğeniler
+                    </label>
+                    <div class="fw-medium fs-4 text-danger">0</div>
+                    <small class="text-muted">Toplam beğeni sayısı</small>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card border-0 shadow-sm mt-3">
+            <div class="card-header bg-white border-0">
+                <h5 class="mb-0">
+                    <i class="fas fa-lightbulb me-2 text-warning"></i>Hızlı İşlemler
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="d-grid gap-2">
+                    <a href="#" class="btn btn-outline-primary btn-sm">
+                        <i class="fas fa-eye me-2"></i>Site'de Görüntüle
+                    </a>
+                    <a href="#" class="btn btn-outline-success btn-sm">
+                        <i class="fas fa-share me-2"></i>Sosyal Medyada Paylaş
+                    </a>
+                    <a href="#" class="btn btn-outline-info btn-sm">
+                        <i class="fas fa-copy me-2"></i>URL'yi Kopyala
+                    </a>
+                    <a href="#" class="btn btn-outline-warning btn-sm">
+                        <i class="fas fa-print me-2"></i>Yazdır
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

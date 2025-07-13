@@ -1,0 +1,261 @@
+﻿@model UluHaber.Entities.Category
+
+@{
+    ViewData["Title"] = "Kategori Detayları";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="h3 mb-0">
+                <i class="fas fa-eye me-2"></i>Kategori Detayları
+            </h1>
+            <div class="d-flex gap-2">
+                <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-admin btn-warning">
+                    <i class="fas fa-edit me-2"></i>Düzenle
+                </a>
+                <a asp-action="Index" class="btn btn-admin btn-outline-secondary">
+                    <i class="fas fa-arrow-left me-2"></i>Geri Dön
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-0">
+                <h5 class="mb-0">
+                    <i class="fas fa-info-circle me-2 text-primary"></i>Kategori Bilgileri
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-medium text-muted">
+                            <i class="fas fa-tag me-1"></i>Kategori Adı
+                        </label>
+                        <div class="fw-medium fs-5">@Model.Name</div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-medium text-muted">
+                            <i class="fas fa-link me-1"></i>URL Adı
+                        </label>
+                        <div class="fw-medium">
+                            <code class="bg-light px-2 py-1 rounded">@Model.Slug</code>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label fw-medium text-muted">
+                        <i class="fas fa-align-left me-1"></i>Açıklama
+                    </label>
+                    <div class="fw-medium">
+                        @if (!string.IsNullOrEmpty(Model.Description))
+                        {
+                            @Model.Description
+                        }
+                        else
+                        {
+                            <span class="text-muted">Açıklama girilmemiş</span>
+                        }
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-medium text-muted">
+                            <i class="fas fa-icons me-1"></i>İkon
+                        </label>
+                        <div class="fw-medium">
+                            @if (!string.IsNullOrEmpty(Model.Icon))
+                            {
+                                <div class="d-flex align-items-center">
+                                    <i class="@Model.Icon me-2" style="color: @Model.Color; font-size: 1.5rem;"></i>
+                                    <code class="bg-light px-2 py-1 rounded">@Model.Icon</code>
+                                </div>
+                            }
+                            else
+                            {
+                                <span class="text-muted">İkon belirlenmemiş</span>
+                            }
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-medium text-muted">
+                            <i class="fas fa-palette me-1"></i>Renk
+                        </label>
+                        <div class="fw-medium">
+                            @if (!string.IsNullOrEmpty(Model.Color))
+                            {
+                                <div class="d-flex align-items-center">
+                                    <div class="rounded-circle me-2" style="width: 25px; height: 25px; background-color: @Model.Color;"></div>
+                                    <code class="bg-light px-2 py-1 rounded">@Model.Color</code>
+                                </div>
+                            }
+                            else
+                            {
+                                <span class="text-muted">Renk belirlenmemiş</span>
+                            }
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-medium text-muted">
+                            <i class="fas fa-sort-numeric-up me-1"></i>Sıralama
+                        </label>
+                        <div class="fw-medium">
+                            <span class="badge bg-info fs-6">@Model.DisplayOrder</span>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-medium text-muted">
+                            <i class="fas fa-toggle-on me-1"></i>Durum
+                        </label>
+                        <div class="fw-medium">
+                            @if (Model.IsActive)
+                            {
+                                <span class="badge bg-success fs-6">
+                                    <i class="fas fa-check me-1"></i>Aktif
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary fs-6">
+                                    <i class="fas fa-times me-1"></i>Pasif
+                                </span>
+                            }
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label fw-medium text-muted">
+                        <i class="fas fa-star me-1"></i>Özellikler
+                    </label>
+                    <div class="fw-medium">
+                        <div class="d-flex flex-wrap gap-2">
+                            @if (Model.IsFeatured)
+                            {
+                                <span class="badge bg-warning fs-6">
+                                    <i class="fas fa-star me-1"></i>Öne Çıkan
+                                </span>
+                            }
+                            @if (Model.ShowInSidebar)
+                            {
+                                <span class="badge bg-primary fs-6">
+                                    <i class="fas fa-list me-1"></i>Sidebar'da Göster
+                                </span>
+                            }
+                            @if (!Model.IsFeatured && !Model.ShowInSidebar)
+                            {
+                                <span class="text-muted">Özel özellik belirlenmemiş</span>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-4">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-0">
+                <h5 class="mb-0">
+                    <i class="fas fa-clock me-2 text-info"></i>Zaman Bilgileri
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label class="form-label fw-medium text-muted">
+                        <i class="fas fa-hashtag me-1"></i>Kategori ID
+                    </label>
+                    <div class="fw-medium fs-5">@Model.Id</div>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label fw-medium text-muted">
+                        <i class="fas fa-calendar-plus me-1"></i>Oluşturulma Tarihi
+                    </label>
+                    <div class="fw-medium">
+                        <i class="fas fa-clock me-1 text-muted"></i>
+                        @Model.CreatedAt.ToString("dd MMMM yyyy, dddd")
+                    </div>
+                    <small class="text-muted">@Model.CreatedAt.ToString("HH:mm")</small>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label fw-medium text-muted">
+                        <i class="fas fa-calendar-edit me-1"></i>Son Güncelleme
+                    </label>
+                    <div class="fw-medium">
+                        <i class="fas fa-clock me-1 text-muted"></i>
+                        @Model.UpdatedAt.ToString("dd MMMM yyyy, dddd")
+                    </div>
+                    <small class="text-muted">@Model.UpdatedAt.ToString("HH:mm")</small>
+                </div>
+                
+                @{
+                    var timeDiff = DateTime.Now - Model.UpdatedAt;
+                    var daysAgo = (int)timeDiff.TotalDays;
+                }
+                
+                <div class="mb-3">
+                    <label class="form-label fw-medium text-muted">
+                        <i class="fas fa-history me-1"></i>Son Güncelleme
+                    </label>
+                    <div class="fw-medium">
+                        @if (daysAgo == 0)
+                        {
+                            <span class="badge bg-success">Bugün güncellendi</span>
+                        }
+                        else if (daysAgo == 1)
+                        {
+                            <span class="badge bg-info">1 gün önce</span>
+                        }
+                        else if (daysAgo < 7)
+                        {
+                            <span class="badge bg-warning">@daysAgo gün önce</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary">@daysAgo gün önce</span>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card border-0 shadow-sm mt-3">
+            <div class="card-header bg-white border-0">
+                <h5 class="mb-0">
+                    <i class="fas fa-chart-bar me-2 text-success"></i>İstatistikler
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label class="form-label fw-medium text-muted">
+                        <i class="fas fa-newspaper me-1"></i>Haber Sayısı
+                    </label>
+                    <div class="fw-medium fs-4 text-primary">0</div>
+                    <small class="text-muted">Bu kategoride henüz haber yok</small>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label fw-medium text-muted">
+                        <i class="fas fa-eye me-1"></i>Görüntülenme
+                    </label>
+                    <div class="fw-medium fs-4 text-success">0</div>
+                    <small class="text-muted">Toplam görüntülenme sayısı</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,276 @@
+﻿@model UluHaber.Entities.Post
+
+@{
+    ViewData["Title"] = "Yeni Haber";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="h3 mb-0">
+                <i class="fas fa-plus me-2"></i>Yeni Haber Ekle
+            </h1>
+            <a asp-action="Index" class="btn btn-admin btn-outline-secondary">
+                <i class="fas fa-arrow-left me-2"></i>Geri Dön
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-0">
+                <h5 class="mb-0">
+                    <i class="fas fa-edit me-2 text-primary"></i>Haber Bilgileri
+                </h5>
+            </div>
+            <div class="card-body">
+                <form asp-action="Create" method="post">
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+                    
+                    <div class="row">
+                        <div class="col-md-8 mb-3">
+                            <label asp-for="Title" class="form-label fw-medium">
+                                <i class="fas fa-heading me-1"></i>Haber Başlığı
+                            </label>
+                            <input asp-for="Title" class="form-control" placeholder="Haber başlığını giriniz..." />
+                            <span asp-validation-for="Title" class="text-danger small"></span>
+                        </div>
+                        
+                        <div class="col-md-4 mb-3">
+                            <label asp-for="Slug" class="form-label fw-medium">
+                                <i class="fas fa-link me-1"></i>URL Başlığı
+                            </label>
+                            <input asp-for="Slug" class="form-control" placeholder="haber-basligi" />
+                            <span asp-validation-for="Slug" class="text-danger small"></span>
+                            <small class="form-text text-muted">URL'de kullanılacak kısa başlık</small>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label asp-for="Summary" class="form-label fw-medium">
+                            <i class="fas fa-align-left me-1"></i>Özet
+                        </label>
+                        <textarea asp-for="Summary" class="form-control" rows="3" placeholder="Haberin kısa özetini giriniz..."></textarea>
+                        <span asp-validation-for="Summary" class="text-danger small"></span>
+                        <small class="form-text text-muted">Ana sayfada görünecek kısa açıklama</small>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label asp-for="Content" class="form-label fw-medium">
+                            <i class="fas fa-file-text me-1"></i>Haber İçeriği
+                        </label>
+                        <textarea asp-for="Content" class="form-control" rows="10" placeholder="Haberin detaylı içeriğini giriniz..."></textarea>
+                        <span asp-validation-for="Content" class="text-danger small"></span>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="CategoryId" class="form-label fw-medium">
+                                <i class="fas fa-tags me-1"></i>Kategori
+                            </label>
+                            <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId">
+                                <option value="">Kategori Seçiniz</option>
+                            </select>
+                            <span asp-validation-for="CategoryId" class="text-danger small"></span>
+                        </div>
+                        
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="AuthorId" class="form-label fw-medium">
+                                <i class="fas fa-user me-1"></i>Yazar
+                            </label>
+                            <select asp-for="AuthorId" class="form-control" asp-items="ViewBag.AuthorId">
+                                <option value="">Yazar Seçiniz</option>
+                            </select>
+                            <span asp-validation-for="AuthorId" class="text-danger small"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="AuthorName" class="form-label fw-medium">
+                                <i class="fas fa-user-edit me-1"></i>Yazar Adı
+                            </label>
+                            <input asp-for="AuthorName" class="form-control" placeholder="Yazarın görünen adı" />
+                            <span asp-validation-for="AuthorName" class="text-danger small"></span>
+                        </div>
+                        
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="FeaturedImage" class="form-label fw-medium">
+                                <i class="fas fa-image me-1"></i>Ana Görsel
+                            </label>
+                            <input asp-for="FeaturedImage" class="form-control" placeholder="https://example.com/image.jpg" />
+                            <span asp-validation-for="FeaturedImage" class="text-danger small"></span>
+                            <small class="form-text text-muted">Haberin ana görseli için URL</small>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="PublishedAt" class="form-label fw-medium">
+                                <i class="fas fa-calendar-alt me-1"></i>Yayın Tarihi
+                            </label>
+                            <input asp-for="PublishedAt" class="form-control" type="datetime-local" />
+                            <span asp-validation-for="PublishedAt" class="text-danger small"></span>
+                            <small class="form-text text-muted">Haberin yayınlanacağı tarih ve saat</small>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" asp-for="IsPublished" />
+                                <label class="form-check-label fw-medium" asp-for="IsPublished">
+                                    <i class="fas fa-globe me-1"></i>Yayınla
+                                </label>
+                            </div>
+                            <small class="form-text text-muted">Haberi hemen yayınla</small>
+                        </div>
+                        
+                        <div class="col-md-4 mb-3">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" asp-for="IsFeatured" />
+                                <label class="form-check-label fw-medium" asp-for="IsFeatured">
+                                    <i class="fas fa-star me-1"></i>Öne Çıkan
+                                </label>
+                            </div>
+                            <small class="form-text text-muted">Ana sayfada öne çıkar</small>
+                        </div>
+                        
+                        <div class="col-md-4 mb-3">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" asp-for="IsBreakingNews" />
+                                <label class="form-check-label fw-medium" asp-for="IsBreakingNews">
+                                    <i class="fas fa-fire me-1"></i>Son Dakika
+                                </label>
+                            </div>
+                            <small class="form-text text-muted">Son dakika haberi olarak işaretle</small>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-admin btn-primary">
+                            <i class="fas fa-save me-2"></i>Kaydet
+                        </button>
+                        <a asp-action="Index" class="btn btn-admin btn-outline-secondary">
+                            <i class="fas fa-times me-2"></i>İptal
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-4">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-0">
+                <h5 class="mb-0">
+                    <i class="fas fa-lightbulb me-2 text-warning"></i>Yazım İpuçları
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <h6 class="fw-medium">
+                        <i class="fas fa-heading me-1 text-primary"></i>Başlık Yazımı
+                    </h6>
+                    <ul class="small text-muted">
+                        <li>Net ve anlaşılır olmalı</li>
+                        <li>SEO için anahtar kelimeler içermeli</li>
+                        <li>60 karakteri geçmemeli</li>
+                        <li>Dikkat çekici olmalı</li>
+                    </ul>
+                </div>
+                
+                <div class="mb-3">
+                    <h6 class="fw-medium">
+                        <i class="fas fa-align-left me-1 text-success"></i>İçerik Yazımı
+                    </h6>
+                    <ul class="small text-muted">
+                        <li>5N1K kuralına uygun olmalı</li>
+                        <li>Paragraflar kısa olmalı</li>
+                        <li>Alt başlıklar kullanılmalı</li>
+                        <li>Görsel destekli olmalı</li>
+                    </ul>
+                </div>
+                
+                <div class="mb-3">
+                    <h6 class="fw-medium">
+                        <i class="fas fa-image me-1 text-info"></i>Görsel Seçimi
+                    </h6>
+                    <ul class="small text-muted">
+                        <li>Yüksek kaliteli olmalı</li>
+                        <li>16:9 oranında olmalı</li>
+                        <li>Telif hakkı sorunu olmamalı</li>
+                        <li>Haberle ilgili olmalı</li>
+                    </ul>
+                </div>
+                
+                <div class="mb-3">
+                    <h6 class="fw-medium">
+                        <i class="fas fa-tags me-1 text-warning"></i>Kategori Seçimi
+                    </h6>
+                    <ul class="small text-muted">
+                        <li>En uygun kategoriyi seçin</li>
+                        <li>Alt kategorileri değerlendirin</li>
+                        <li>Çoklu kategori kullanmayın</li>
+                        <li>SEO için önemli</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card border-0 shadow-sm mt-3">
+            <div class="card-header bg-white border-0">
+                <h5 class="mb-0">
+                    <i class="fas fa-chart-bar me-2 text-success"></i>SEO Önerileri
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-info" role="alert">
+                    <h6 class="alert-heading">
+                        <i class="fas fa-search me-2"></i>Arama Motoru Optimizasyonu
+                    </h6>
+                    <ul class="mb-0 small">
+                        <li>Başlıkta anahtar kelimeler kullanın</li>
+                        <li>Meta açıklama ekleyin</li>
+                        <li>Alt etiketleri doldurun</li>
+                        <li>İç linkleme yapın</li>
+                        <li>Hızlı yüklenen görseller kullanın</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Başlık değiştiğinde otomatik slug oluştur
+        document.querySelector('input[asp-for="Title"]').addEventListener('input', function() {
+            const title = this.value;
+            const slug = title
+                .toLowerCase()
+                .replace(/ğ/g, 'g')
+                .replace(/ü/g, 'u')
+                .replace(/ş/g, 's')
+                .replace(/ı/g, 'i')
+                .replace(/ö/g, 'o')
+                .replace(/ç/g, 'c')
+                .replace(/[^a-z0-9\s-]/g, '')
+                .replace(/\s+/g, '-')
+                .replace(/-+/g, '-')
+                .trim('-');
+            
+            document.querySelector('input[asp-for="Slug"]').value = slug;
+        });
+        
+        // Yayın tarihi varsayılan değeri
+        if (!document.querySelector('input[asp-for="PublishedAt"]').value) {
+            const now = new Date();
+            const localDateTime = new Date(now.getTime() - now.getTimezoneOffset() * 60000).toISOString().slice(0, 16);
+            document.querySelector('input[asp-for="PublishedAt"]').value = localDateTime;
+        }
+    </script>
+}
+

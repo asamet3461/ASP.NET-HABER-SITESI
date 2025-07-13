@@ -1,0 +1,164 @@
+﻿@model IEnumerable<UluHaber.Entities.Category>
+
+@{
+    ViewData["Title"] = "Kategoriler";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="h3 mb-0">
+                <i class="fas fa-tags me-2"></i>Kategoriler
+            </h1>
+            <a asp-action="Create" class="btn btn-admin btn-primary">
+                <i class="fas fa-plus me-2"></i>Yeni Kategori
+            </a>
+        </div>
+    </div>
+</div>
+
+@if (Model.Any())
+{
+    <div class="card border-0 shadow-sm">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0 table-admin">
+                    <thead>
+                        <tr>
+                            <th style="width: 50px;">
+                                <i class="fas fa-hashtag"></i>
+                            </th>
+                            <th>Kategori Adı</th>
+                            <th>URL Adı</th>
+                            <th>Açıklama</th>
+                            <th style="width: 80px;">İkon</th>
+                            <th style="width: 80px;">Renk</th>
+                            <th style="width: 100px;">Durum</th>
+                            <th style="width: 80px;">Sıra</th>
+                            <th style="width: 120px;">Özellikler</th>
+                            <th style="width: 120px;">İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="text-muted">@item.Id</td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        @if (!string.IsNullOrEmpty(item.Icon))
+                                        {
+                                            <i class="@item.Icon me-2" style="color: @item.Color; font-size: 1.2rem;"></i>
+                                        }
+                                        <div>
+                                            <div class="fw-medium">@item.Name</div>
+                                            @if (!string.IsNullOrEmpty(item.Description))
+                                            {
+                                                <small class="text-muted">@(item.Description.Length > 50 ? item.Description.Substring(0, 50) + "..." : item.Description)</small>
+                                            }
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <code class="small">@item.Slug</code>
+                                </td>
+                                <td>
+                                    @if (!string.IsNullOrEmpty(item.Description))
+                                    {
+                                        <span title="@item.Description">@(item.Description.Length > 30 ? item.Description.Substring(0, 30) + "..." : item.Description)</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">-</span>
+                                    }
+                                </td>
+                                <td>
+                                    @if (!string.IsNullOrEmpty(item.Icon))
+                                    {
+                                        <i class="@item.Icon" style="color: @item.Color; font-size: 1.2rem;"></i>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">-</span>
+                                    }
+                                </td>
+                                <td>
+                                    @if (!string.IsNullOrEmpty(item.Color))
+                                    {
+                                        <div class="d-flex align-items-center">
+                                            <div class="rounded-circle me-2" style="width: 20px; height: 20px; background-color: @item.Color;"></div>
+                                            <small>@item.Color</small>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">-</span>
+                                    }
+                                </td>
+                                <td>
+                                    @if (item.IsActive)
+                                    {
+                                        <span class="badge bg-success">
+                                            <i class="fas fa-check me-1"></i>Aktif
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-secondary">
+                                            <i class="fas fa-times me-1"></i>Pasif
+                                        </span>
+                                    }
+                                </td>
+                                <td>
+                                    <span class="badge bg-info">@item.DisplayOrder</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex flex-column gap-1">
+                                        @if (item.IsFeatured)
+                                        {
+                                            <span class="badge bg-warning">
+                                                <i class="fas fa-star me-1"></i>Öne Çıkan
+                                            </span>
+                                        }
+                                        @if (item.ShowInSidebar)
+                                        {
+                                            <span class="badge bg-primary">
+                                                <i class="fas fa-list me-1"></i>Sidebar
+                                            </span>
+                                        }
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="btn-group" role="group">
+                                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-info" title="Detaylar">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-warning" title="Düzenle">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger" title="Sil">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="card border-0 shadow-sm">
+        <div class="card-body text-center py-5">
+            <i class="fas fa-tags fa-3x text-muted mb-3"></i>
+            <h5 class="text-muted">Henüz kategori eklenmemiş</h5>
+            <p class="text-muted mb-4">İlk kategoriyi ekleyerek başlayın</p>
+            <a asp-action="Create" class="btn btn-admin btn-primary">
+                <i class="fas fa-plus me-2"></i>İlk Kategoriyi Ekle
+            </a>
+        </div>
+    </div>
+}

@@ -1,0 +1,283 @@
+﻿@model UluHaber.Entities.Category
+
+@{
+    ViewData["Title"] = "Kategori Düzenle";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="h3 mb-0">
+                <i class="fas fa-edit me-2"></i>Kategori Düzenle
+            </h1>
+            <a asp-action="Index" class="btn btn-admin btn-outline-secondary">
+                <i class="fas fa-arrow-left me-2"></i>Geri Dön
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-0">
+                <h5 class="mb-0">
+                    <i class="fas fa-edit me-2 text-primary"></i>Kategori Bilgileri
+                </h5>
+            </div>
+            <div class="card-body">
+                <form asp-action="Edit" method="post">
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <input type="hidden" asp-for="CreatedAt" />
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Name" class="form-label fw-medium">
+                                <i class="fas fa-tag me-1"></i>Kategori Adı
+                            </label>
+                            <input asp-for="Name" class="form-control" placeholder="Örn: Ekonomi, Spor, Teknoloji" />
+                            <span asp-validation-for="Name" class="text-danger small"></span>
+                        </div>
+                        
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Slug" class="form-label fw-medium">
+                                <i class="fas fa-link me-1"></i>URL Adı
+                            </label>
+                            <input asp-for="Slug" class="form-control" placeholder="Örn: ekonomi, spor, teknoloji" />
+                            <span asp-validation-for="Slug" class="text-danger small"></span>
+                            <small class="form-text text-muted">URL'de kullanılacak kısa ad (küçük harf, tire ile ayrılmış)</small>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label asp-for="Description" class="form-label fw-medium">
+                            <i class="fas fa-align-left me-1"></i>Açıklama
+                        </label>
+                        <textarea asp-for="Description" class="form-control" rows="3" placeholder="Kategori hakkında kısa açıklama..."></textarea>
+                        <span asp-validation-for="Description" class="text-danger small"></span>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Icon" class="form-label fw-medium">
+                                <i class="fas fa-icons me-1"></i>İkon
+                            </label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-search"></i></span>
+                                <input asp-for="Icon" class="form-control" placeholder="Örn: fas fa-chart-line" id="iconInput" />
+                            </div>
+                            <span asp-validation-for="Icon" class="text-danger small"></span>
+                            <small class="form-text text-muted">Font Awesome ikon sınıfı (örn: fas fa-chart-line)</small>
+                        </div>
+                        
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Color" class="form-label fw-medium">
+                                <i class="fas fa-palette me-1"></i>Renk
+                            </label>
+                            <div class="input-group">
+                                <input asp-for="Color" type="color" class="form-control form-control-color" />
+                                <input asp-for="Color" class="form-control" placeholder="#3498db" />
+                            </div>
+                            <span asp-validation-for="Color" class="text-danger small"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="DisplayOrder" class="form-label fw-medium">
+                                <i class="fas fa-sort-numeric-up me-1"></i>Sıralama
+                            </label>
+                            <input asp-for="DisplayOrder" class="form-control" type="number" min="0" />
+                            <span asp-validation-for="DisplayOrder" class="text-danger small"></span>
+                            <small class="form-text text-muted">Kategorilerin görüntülenme sırası (küçük sayılar önce)</small>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" asp-for="IsActive" />
+                                <label class="form-check-label fw-medium" asp-for="IsActive">
+                                    <i class="fas fa-toggle-on me-1"></i>Aktif
+                                </label>
+                            </div>
+                            <small class="form-text text-muted">Kategori aktif olarak görünsün</small>
+                        </div>
+                        
+                        <div class="col-md-4 mb-3">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" asp-for="IsFeatured" />
+                                <label class="form-check-label fw-medium" asp-for="IsFeatured">
+                                    <i class="fas fa-star me-1"></i>Öne Çıkan
+                                </label>
+                            </div>
+                            <small class="form-text text-muted">Ana sayfada öne çıkarılsın</small>
+                        </div>
+                        
+                        <div class="col-md-4 mb-3">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" asp-for="ShowInSidebar" />
+                                <label class="form-check-label fw-medium" asp-for="ShowInSidebar">
+                                    <i class="fas fa-list me-1"></i>Sidebar'da Göster
+                                </label>
+                            </div>
+                            <small class="form-text text-muted">Yan menüde görünsün</small>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-admin btn-primary">
+                            <i class="fas fa-save me-2"></i>Güncelle
+                        </button>
+                        <a asp-action="Index" class="btn btn-admin btn-outline-secondary">
+                            <i class="fas fa-times me-2"></i>İptal
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-4">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-0">
+                <h5 class="mb-0">
+                    <i class="fas fa-lightbulb me-2 text-warning"></i>Önerilen İkonlar
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row g-2">
+                    <div class="col-4">
+                        <button type="button" class="btn btn-outline-secondary btn-sm w-100 icon-btn" data-icon="fas fa-chart-line">
+                            <i class="fas fa-chart-line"></i>
+                        </button>
+                    </div>
+                    <div class="col-4">
+                        <button type="button" class="btn btn-outline-secondary btn-sm w-100 icon-btn" data-icon="fas fa-futbol">
+                            <i class="fas fa-futbol"></i>
+                        </button>
+                    </div>
+                    <div class="col-4">
+                        <button type="button" class="btn btn-outline-secondary btn-sm w-100 icon-btn" data-icon="fas fa-laptop">
+                            <i class="fas fa-laptop"></i>
+                        </button>
+                    </div>
+                    <div class="col-4">
+                        <button type="button" class="btn btn-outline-secondary btn-sm w-100 icon-btn" data-icon="fas fa-landmark">
+                            <i class="fas fa-landmark"></i>
+                        </button>
+                    </div>
+                    <div class="col-4">
+                        <button type="button" class="btn btn-outline-secondary btn-sm w-100 icon-btn" data-icon="fas fa-heartbeat">
+                            <i class="fas fa-heartbeat"></i>
+                        </button>
+                    </div>
+                    <div class="col-4">
+                        <button type="button" class="btn btn-outline-secondary btn-sm w-100 icon-btn" data-icon="fas fa-car">
+                            <i class="fas fa-car"></i>
+                        </button>
+                    </div>
+                    <div class="col-4">
+                        <button type="button" class="btn btn-outline-secondary btn-sm w-100 icon-btn" data-icon="fas fa-graduation-cap">
+                            <i class="fas fa-graduation-cap"></i>
+                        </button>
+                    </div>
+                    <div class="col-4">
+                        <button type="button" class="btn btn-outline-secondary btn-sm w-100 icon-btn" data-icon="fas fa-music">
+                            <i class="fas fa-music"></i>
+                        </button>
+                    </div>
+                    <div class="col-4">
+                        <button type="button" class="btn btn-outline-secondary btn-sm w-100 icon-btn" data-icon="fas fa-camera">
+                            <i class="fas fa-camera"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <hr>
+                
+                <h6 class="mb-3">Önerilen Renkler</h6>
+                <div class="row g-2">
+                    <div class="col-3">
+                        <button type="button" class="btn btn-sm w-100 color-btn" style="background-color: #3498db; border-color: #3498db;" data-color="#3498db"></button>
+                    </div>
+                    <div class="col-3">
+                        <button type="button" class="btn btn-sm w-100 color-btn" style="background-color: #e74c3c; border-color: #e74c3c;" data-color="#e74c3c"></button>
+                    </div>
+                    <div class="col-3">
+                        <button type="button" class="btn btn-sm w-100 color-btn" style="background-color: #27ae60; border-color: #27ae60;" data-color="#27ae60"></button>
+                    </div>
+                    <div class="col-3">
+                        <button type="button" class="btn btn-sm w-100 color-btn" style="background-color: #f39c12; border-color: #f39c12;" data-color="#f39c12"></button>
+                    </div>
+                    <div class="col-3">
+                        <button type="button" class="btn btn-sm w-100 color-btn" style="background-color: #9b59b6; border-color: #9b59b6;" data-color="#9b59b6"></button>
+                    </div>
+                    <div class="col-3">
+                        <button type="button" class="btn btn-sm w-100 color-btn" style="background-color: #1abc9c; border-color: #1abc9c;" data-color="#1abc9c"></button>
+                    </div>
+                    <div class="col-3">
+                        <button type="button" class="btn btn-sm w-100 color-btn" style="background-color: #34495e; border-color: #34495e;" data-color="#34495e"></button>
+                    </div>
+                    <div class="col-3">
+                        <button type="button" class="btn btn-sm w-100 color-btn" style="background-color: #e67e22; border-color: #e67e22;" data-color="#e67e22"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card border-0 shadow-sm mt-3">
+            <div class="card-header bg-white border-0">
+                <h5 class="mb-0">
+                    <i class="fas fa-info-circle me-2 text-info"></i>Kategori Bilgileri
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="mb-2">
+                    <small class="text-muted">ID:</small>
+                    <div class="fw-medium">@Model.Id</div>
+                </div>
+                <div class="mb-2">
+                    <small class="text-muted">Oluşturulma Tarihi:</small>
+                    <div class="fw-medium">@Model.CreatedAt.ToString("dd.MM.yyyy HH:mm")</div>
+                </div>
+                <div class="mb-2">
+                    <small class="text-muted">Son Güncelleme:</small>
+                    <div class="fw-medium">@Model.UpdatedAt.ToString("dd.MM.yyyy HH:mm")</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // İkon seçimi
+        document.querySelectorAll('.icon-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const icon = this.getAttribute('data-icon');
+                document.getElementById('iconInput').value = icon;
+            });
+        });
+        
+        // Renk seçimi
+        document.querySelectorAll('.color-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const color = this.getAttribute('data-color');
+                document.querySelector('input[type="color"]').value = color;
+                document.querySelector('input[placeholder="#3498db"]').value = color;
+            });
+        });
+        
+        // Renk input senkronizasyonu
+        document.querySelector('input[type="color"]').addEventListener('input', function() {
+            document.querySelector('input[placeholder="#3498db"]').value = this.value;
+        });
+        
+        document.querySelector('input[placeholder="#3498db"]').addEventListener('input', function() {
+            document.querySelector('input[type="color"]').value = this.value;
+        });
+    </script>
+}
+

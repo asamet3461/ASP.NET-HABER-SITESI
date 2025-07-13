@@ -1,0 +1,209 @@
+﻿@model UluHaber.Entities.User
+
+@{
+    ViewData["Title"] = "Kullanıcı Sil";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="h3 mb-0">
+                <i class="fas fa-trash me-2 text-danger"></i>Kullanıcı Sil
+            </h1>
+            <a asp-action="Index" class="btn btn-admin btn-outline-secondary">
+                <i class="fas fa-arrow-left me-2"></i>Geri Dön
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-8">
+        <div class="alert alert-danger" role="alert">
+            <h4 class="alert-heading">
+                <i class="fas fa-exclamation-triangle me-2"></i>Dikkat!
+            </h4>
+            <p class="mb-0">
+                <strong>@Model.FirstName @Model.LastName</strong> kullanıcısını silmek üzeresiniz. Bu işlem geri alınamaz ve kullanıcının tüm verileri kalıcı olarak silinecektir.
+            </p>
+        </div>
+        
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-0">
+                <h5 class="mb-0">
+                    <i class="fas fa-user-times me-2 text-danger"></i>Silinecek Kullanıcı Bilgileri
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-medium text-muted">
+                            <i class="fas fa-user me-1"></i>Ad Soyad
+                        </label>
+                        <div class="fw-medium">@Model.FirstName @Model.LastName</div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-medium text-muted">
+                            <i class="fas fa-at me-1"></i>Kullanıcı Adı
+                        </label>
+                        <div class="fw-medium">@Model.Username</div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-medium text-muted">
+                            <i class="fas fa-envelope me-1"></i>E-posta
+                        </label>
+                        <div class="fw-medium">@Model.Email</div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-medium text-muted">
+                            <i class="fas fa-hashtag me-1"></i>Kullanıcı ID
+                        </label>
+                        <div class="fw-medium">@Model.Id</div>
+                    </div>
+                </div>
+                
+                @if (!string.IsNullOrEmpty(Model.Bio))
+                {
+                    <div class="mb-3">
+                        <label class="form-label fw-medium text-muted">
+                            <i class="fas fa-align-left me-1"></i>Hakkında
+                        </label>
+                        <div class="fw-medium">@Model.Bio</div>
+                    </div>
+                }
+                
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-medium text-muted">
+                            <i class="fas fa-shield-alt me-1"></i>Roller
+                        </label>
+                        <div class="d-flex flex-column gap-1">
+                            @if (Model.IsAdmin)
+                            {
+                                <span class="badge bg-danger">
+                                    <i class="fas fa-crown me-1"></i>Admin
+                                </span>
+                            }
+                            @if (Model.IsAuthor)
+                            {
+                                <span class="badge bg-warning">
+                                    <i class="fas fa-pen me-1"></i>Yazar
+                                </span>
+                            }
+                            @if (!Model.IsAdmin && !Model.IsAuthor)
+                            {
+                                <span class="badge bg-secondary">
+                                    <i class="fas fa-user me-1"></i>Kullanıcı
+                                </span>
+                            }
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-medium text-muted">
+                            <i class="fas fa-calendar-plus me-1"></i>Kayıt Tarihi
+                        </label>
+                        <div class="fw-medium">
+                            <i class="fas fa-clock me-1 text-muted"></i>
+                            @Model.CreatedAt.ToString("dd MMMM yyyy, dddd")
+                        </div>
+                        <small class="text-muted">@Model.CreatedAt.ToString("HH:mm")</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card border-0 shadow-sm mt-3">
+            <div class="card-header bg-white border-0">
+                <h5 class="mb-0">
+                    <i class="fas fa-exclamation-circle me-2 text-warning"></i>Silme İşlemi Hakkında
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-warning" role="alert">
+                    <h6 class="alert-heading">
+                        <i class="fas fa-info-circle me-2"></i>Önemli Bilgiler
+                    </h6>
+                    <ul class="mb-0">
+                        <li>Bu işlem geri alınamaz</li>
+                        <li>Kullanıcının tüm verileri kalıcı olarak silinecek</li>
+                        <li>Kullanıcının yazdığı haberler silinecek</li>
+                        <li>Kullanıcının yaptığı yorumlar silinecek</li>
+                        <li>Kullanıcının profil bilgileri silinecek</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-4">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-0">
+                <h5 class="mb-0">
+                    <i class="fas fa-chart-bar me-2 text-info"></i>Kullanıcı İstatistikleri
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label class="form-label fw-medium text-muted">
+                        <i class="fas fa-newspaper me-1"></i>Haber Sayısı
+                    </label>
+                    <div class="fw-medium fs-4 text-primary">0</div>
+                    <small class="text-muted">Yazdığı toplam haber</small>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label fw-medium text-muted">
+                        <i class="fas fa-comments me-1"></i>Yorum Sayısı
+                    </label>
+                    <div class="fw-medium fs-4 text-success">0</div>
+                    <small class="text-muted">Yaptığı toplam yorum</small>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label fw-medium text-muted">
+                        <i class="fas fa-eye me-1"></i>Görüntülenme
+                    </label>
+                    <div class="fw-medium fs-4 text-warning">0</div>
+                    <small class="text-muted">Toplam profil görüntülenme</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <form asp-action="Delete" method="post">
+                    <input type="hidden" asp-for="Id" />
+                    
+                    <div class="alert alert-danger" role="alert">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-exclamation-triangle fa-2x me-3"></i>
+                            <div>
+                                <h5 class="alert-heading mb-1">Son Uyarı!</h5>
+                                <p class="mb-0">Bu işlemi gerçekleştirmek istediğinizden emin misiniz? Bu işlem geri alınamaz.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-admin btn-danger">
+                            <i class="fas fa-trash me-2"></i>Evet, Kullanıcıyı Sil
+                        </button>
+                        <a asp-action="Index" class="btn btn-admin btn-outline-secondary">
+                            <i class="fas fa-times me-2"></i>İptal Et
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

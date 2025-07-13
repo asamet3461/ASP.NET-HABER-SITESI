@@ -1,0 +1,15 @@
+﻿@model IEnumerable<Category>
+
+<div class="nav-scroller py-1 mb-3 border-bottom">
+    <nav class="nav nav-underline justify-content-between">
+      
+        @foreach (var item in Model)
+        {
+            if (item.Name == "Ana Sayfa")
+            {
+                continue;
+            }
+            <a class="nav-item nav-link link-body-emphasis" href="/Categories/Index/@item.Slug">@item.Name</a>
+        }
+    </nav>
+</div>

@@ -1,0 +1,113 @@
+/* _content/UluHaber/Areas/Admin/Views/Shared/_AdminLayout.cshtml.rz.scp.css */
+/* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand[b-gprff2ygqz] {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+a[b-gprff2ygqz] {
+  color: #0077cc;
+}
+
+.btn-primary[b-gprff2ygqz] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active[b-gprff2ygqz], .nav-pills .show > .nav-link[b-gprff2ygqz] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.border-top[b-gprff2ygqz] {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom[b-gprff2ygqz] {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow[b-gprff2ygqz] {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy[b-gprff2ygqz] {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+.footer[b-gprff2ygqz] {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px;
+}
+/* _content/UluHaber/Views/Shared/_Layout.cshtml.rz.scp.css */
+/* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand[b-zzgjzsbb1w] {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+a[b-zzgjzsbb1w] {
+  color: #0077cc;
+}
+
+.btn-primary[b-zzgjzsbb1w] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active[b-zzgjzsbb1w], .nav-pills .show > .nav-link[b-zzgjzsbb1w] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.border-top[b-zzgjzsbb1w] {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom[b-zzgjzsbb1w] {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow[b-zzgjzsbb1w] {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy[b-zzgjzsbb1w] {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+.footer[b-zzgjzsbb1w] {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px;
+}
+
+.btn-home-custom[b-zzgjzsbb1w] {
+  background: #fff !important;
+  color: #111 !important;
+  border: 1.5px solid #111 !important;
+  box-shadow: none !important;
+  font-weight: 500;
+  transition: none !important;
+}
+.btn-home-custom:hover[b-zzgjzsbb1w], .btn-home-custom:focus[b-zzgjzsbb1w], .btn-home-custom:active[b-zzgjzsbb1w] {
+  background: #fff !important;
+  color: #111 !important;
+  border: 1.5px solid #111 !important;
+  box-shadow: none !important;
+}

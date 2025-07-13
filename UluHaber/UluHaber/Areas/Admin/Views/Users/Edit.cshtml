@@ -1,0 +1,231 @@
+﻿@model UluHaber.Entities.User
+
+@{
+    ViewData["Title"] = "Kullanıcı Düzenle";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="h3 mb-0">
+                <i class="fas fa-edit me-2"></i>Kullanıcı Düzenle
+            </h1>
+            <a asp-action="Index" class="btn btn-admin btn-outline-secondary">
+                <i class="fas fa-arrow-left me-2"></i>Geri Dön
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-0">
+                <h5 class="mb-0">
+                    <i class="fas fa-user-edit me-2 text-primary"></i>Kullanıcı Bilgileri
+                </h5>
+            </div>
+            <div class="card-body">
+                <form asp-action="Edit" method="post">
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <input type="hidden" asp-for="CreatedAt" />
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="FirstName" class="form-label fw-medium">
+                                <i class="fas fa-user me-1"></i>Ad
+                            </label>
+                            <input asp-for="FirstName" class="form-control" placeholder="Kullanıcının adını giriniz..." />
+                            <span asp-validation-for="FirstName" class="text-danger small"></span>
+                        </div>
+                        
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="LastName" class="form-label fw-medium">
+                                <i class="fas fa-user me-1"></i>Soyad
+                            </label>
+                            <input asp-for="LastName" class="form-control" placeholder="Kullanıcının soyadını giriniz..." />
+                            <span asp-validation-for="LastName" class="text-danger small"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Username" class="form-label fw-medium">
+                                <i class="fas fa-at me-1"></i>Kullanıcı Adı
+                            </label>
+                            <input asp-for="Username" class="form-control" placeholder="kullanici_adi" />
+                            <span asp-validation-for="Username" class="text-danger small"></span>
+                            <small class="form-text text-muted">Benzersiz kullanıcı adı</small>
+                        </div>
+                        
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Email" class="form-label fw-medium">
+                                <i class="fas fa-envelope me-1"></i>E-posta
+                            </label>
+                            <input asp-for="Email" class="form-control" type="email" placeholder="kullanici@example.com" />
+                            <span asp-validation-for="Email" class="text-danger small"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label asp-for="Password" class="form-label fw-medium">
+                            <i class="fas fa-lock me-1"></i>Şifre
+                        </label>
+                        <input asp-for="Password" class="form-control" type="password" placeholder="Yeni şifre (boş bırakılırsa değişmez)" />
+                        <span asp-validation-for="Password" class="text-danger small"></span>
+                        <small class="form-text text-muted">Yeni şifre girmek istemiyorsanız boş bırakın</small>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label asp-for="Bio" class="form-label fw-medium">
+                            <i class="fas fa-align-left me-1"></i>Hakkında
+                        </label>
+                        <textarea asp-for="Bio" class="form-control" rows="3" placeholder="Kullanıcı hakkında kısa bilgi..."></textarea>
+                        <span asp-validation-for="Bio" class="text-danger small"></span>
+                        <small class="form-text text-muted">İsteğe bağlı kısa açıklama</small>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" asp-for="IsActive" />
+                                <label class="form-check-label fw-medium" asp-for="IsActive">
+                                    <i class="fas fa-toggle-on me-1"></i>Aktif
+                                </label>
+                            </div>
+                            <small class="form-text text-muted">Kullanıcı hesabı aktif</small>
+                        </div>
+                        
+                        <div class="col-md-3 mb-3">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" asp-for="EmailConfirmed" />
+                                <label class="form-check-label fw-medium" asp-for="EmailConfirmed">
+                                    <i class="fas fa-envelope-open me-1"></i>E-posta Onaylı
+                                </label>
+                            </div>
+                            <small class="form-text text-muted">E-posta adresi onaylandı</small>
+                        </div>
+                        
+                        <div class="col-md-3 mb-3">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" asp-for="IsAuthor" />
+                                <label class="form-check-label fw-medium" asp-for="IsAuthor">
+                                    <i class="fas fa-pen me-1"></i>Yazar
+                                </label>
+                            </div>
+                            <small class="form-text text-muted">Haber yazabilir</small>
+                        </div>
+                        
+                        <div class="col-md-3 mb-3">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" asp-for="IsAdmin" />
+                                <label class="form-check-label fw-medium" asp-for="IsAdmin">
+                                    <i class="fas fa-crown me-1"></i>Admin
+                                </label>
+                            </div>
+                            <small class="form-text text-muted">Yönetici yetkileri</small>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-admin btn-primary">
+                            <i class="fas fa-save me-2"></i>Güncelle
+                        </button>
+                        <a asp-action="Index" class="btn btn-admin btn-outline-secondary">
+                            <i class="fas fa-times me-2"></i>İptal
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-4">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-0">
+                <h5 class="mb-0">
+                    <i class="fas fa-info-circle me-2 text-info"></i>Kullanıcı Bilgileri
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label class="form-label fw-medium text-muted">
+                        <i class="fas fa-hashtag me-1"></i>Kullanıcı ID
+                    </label>
+                    <div class="fw-medium fs-5">@Model.Id</div>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label fw-medium text-muted">
+                        <i class="fas fa-calendar-plus me-1"></i>Kayıt Tarihi
+                    </label>
+                    <div class="fw-medium">
+                        <i class="fas fa-clock me-1 text-muted"></i>
+                        @Model.CreatedAt.ToString("dd MMMM yyyy, dddd")
+                    </div>
+                    <small class="text-muted">@Model.CreatedAt.ToString("HH:mm")</small>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label fw-medium text-muted">
+                        <i class="fas fa-calendar-edit me-1"></i>Son Güncelleme
+                    </label>
+                    <div class="fw-medium">
+                        <i class="fas fa-clock me-1 text-muted"></i>
+                        @Model.UpdatedAt.ToString("dd MMMM yyyy, dddd")
+                    </div>
+                    <small class="text-muted">@Model.UpdatedAt.ToString("HH:mm")</small>
+                </div>
+                
+                @if (Model.LastLoginAt.HasValue)
+                {
+                    <div class="mb-3">
+                        <label class="form-label fw-medium text-muted">
+                            <i class="fas fa-sign-in-alt me-1"></i>Son Giriş
+                        </label>
+                        <div class="fw-medium">
+                            <i class="fas fa-clock me-1 text-muted"></i>
+                            @Model.LastLoginAt.Value.ToString("dd MMMM yyyy, dddd")
+                        </div>
+                        <small class="text-muted">@Model.LastLoginAt.Value.ToString("HH:mm")</small>
+                    </div>
+                }
+            </div>
+        </div>
+        
+        <div class="card border-0 shadow-sm mt-3">
+            <div class="card-header bg-white border-0">
+                <h5 class="mb-0">
+                    <i class="fas fa-chart-bar me-2 text-success"></i>İstatistikler
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label class="form-label fw-medium text-muted">
+                        <i class="fas fa-newspaper me-1"></i>Haber Sayısı
+                    </label>
+                    <div class="fw-medium fs-4 text-primary">0</div>
+                    <small class="text-muted">Yazdığı toplam haber</small>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label fw-medium text-muted">
+                        <i class="fas fa-comments me-1"></i>Yorum Sayısı
+                    </label>
+                    <div class="fw-medium fs-4 text-success">0</div>
+                    <small class="text-muted">Yaptığı toplam yorum</small>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label fw-medium text-muted">
+                        <i class="fas fa-eye me-1"></i>Görüntülenme
+                    </label>
+                    <div class="fw-medium fs-4 text-warning">0</div>
+                    <small class="text-muted">Toplam profil görüntülenme</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
